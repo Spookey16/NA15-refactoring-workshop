@@ -31,6 +31,10 @@ public:
     Controller& operator=(Controller const& p_rhs) = delete;
 
     void receive(std::unique_ptr<Event> e) override;
+    bool checkForFoodRecieved(const int &requestedFoodX,const int &requestedFoodY);
+    DisplayInd newDisplayInd(const int &x,const int &y,const Cell &Celll);
+    Direction chooseDirection(char dirChar);
+
 
 private:
     struct Segment
