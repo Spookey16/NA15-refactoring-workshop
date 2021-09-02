@@ -213,15 +213,29 @@ Controller::Segment Controller::getNewHead() const
     return newHead;
 }
 
+void Controller::handlePause()
+{if(paused == true) paused =false;
+    else paused = true;
+}
+
 void Controller::receive(std::unique_ptr<Event> e)
 {
     switch(e->getMessageId())
-    {
-        case TimeoutInd::MESSAGE_ID: return handleTimePassed(*static_cast<EventT<TimeoutInd> const&>(*e));
-        case DirectionInd::MESSAGE_ID: return handleDirectionChange(*static_cast<EventT<DirectionInd> const&>(*e));
-        case FoodInd::MESSAGE_ID: return handleFoodPositionChange(*static_cast<EventT<FoodInd> const&>(*e));
-        case FoodResp::MESSAGE_ID: return handleNewFood(*static_cast<EventT<FoodResp> const&>(*e));
+    {   
+        case TimeoutInd::MESSAGE_ID: if (paused == false){return handleTimePassed(*static_cast<EventT<TimeoutInd> const&>(*e));}
+                                        else return;
+        case DirectionInd::MESSAGE_ID: if (paused == false){return handleDirectionChange(*static_cast<EventT<DirectionInd> const&>(*e));}
+                                else return;
+        case FoodInd::MESSAGE_ID: if (paused == false){return handleFoodPositionChange(*static_cast<EventT<FoodInd> const&>(*e));}
+                                else return;
+        case FoodResp::MESSAGE_ID: if (paused == false){return handleNewFood(*static_cast<EventT<FoodResp> const&>(*e));}
+                                else return;
+    
+        
+        
+        case PauseInd::MESSAGE_ID: return handlePause();
         default: throw UnexpectedEventException();
+        
     };
 }
 
