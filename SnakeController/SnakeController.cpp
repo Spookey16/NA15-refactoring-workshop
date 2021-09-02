@@ -226,10 +226,8 @@ void Controller::receive(std::unique_ptr<Event> e)
                                         else return;
         case DirectionInd::MESSAGE_ID: if (paused == false){return handleDirectionChange(*static_cast<EventT<DirectionInd> const&>(*e));}
                                 else return;
-        case FoodInd::MESSAGE_ID: if (paused == false){return handleFoodPositionChange(*static_cast<EventT<FoodInd> const&>(*e));}
-                                else return;
-        case FoodResp::MESSAGE_ID: if (paused == false){return handleNewFood(*static_cast<EventT<FoodResp> const&>(*e));}
-                                else return;
+        case FoodInd::MESSAGE_ID: return handleFoodPositionChange(*static_cast<EventT<FoodInd> const&>(*e));
+        case FoodResp::MESSAGE_ID:return handleNewFood(*static_cast<EventT<FoodResp> const&>(*e));
     
         
         
