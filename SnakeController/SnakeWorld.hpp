@@ -1,7 +1,6 @@
 #pragma once
 
 #include <utility>
-#include "SnakeDimension.hpp"
 #include "SnakePosition.hpp"
 
 namespace Snake
@@ -19,9 +18,8 @@ public:
 
 private:
 
-    Dimension m_dimension;
+    Position m_dimension;
     Position m_foodPosition;
- //   std::pair<int, int> m_dimension;
 };
 
 } // namespace Snake
