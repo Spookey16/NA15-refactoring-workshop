@@ -7,7 +7,7 @@ World::World(int dimensionx,int  dimensiony, std::pair<int, int> food)
     : m_foodPosition(food)
 {
     m_dimension.x = dimensionx;
- m_dimension.y=dimensiony;
+    m_dimension.y = dimensiony;
  }
 
 void World::setFoodPosition(std::pair<int, int> position)
